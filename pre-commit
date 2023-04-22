@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+fail() {
+    echo $0
+    exit 1
+}
+
+echo "📋 Validating package.json..."
+yarn validate-package-json 
+if [ $? -ne 0 ]; then
+    fail "❌ Invalid package.json."
+else
+    echo "✅ package.json is valid."
+fi
+echo "✨ Running Prettier..."
+yarn prettify
+if [ $? -ne 0 ]; then
+    fail "❌ Prettier error."
+else
+    echo "✅ Prettified successfully."
+fi
+echo "📦 Updating ESM wrapper..."
+yarn esm-wrapper 
+if [ $? -ne 0 ]; then
+    fail "❌ An error occured."
+else
+    echo "✅ Wrapper updated successfully."
+fi
+echo "✅✅ Checks completed."
