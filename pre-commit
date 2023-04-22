@@ -12,7 +12,7 @@ AUTHOR_EMAIL=$(git log -1 --format="%ae")
 echo $WHITELIST | grep -q "$AUTHOR_EMAIL"
 # Check if the author's email is in the whitelist
 if [ $? -ne 1 ]; then
-    echo "Trusted author found, bypassing."
+    echo "Author trusted: $AUTHOR_EMAIL, bypassing hook."
     exit 0
 fi
 
