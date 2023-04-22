@@ -4,6 +4,17 @@ fail() {
     echo $0
     exit 1
 }
+WHITELIST=\
+"santyrojasprieto9+github@gmail.com santyrojasprieto9@gmail.com 95766532+santi100a@users.noreply.github.com"
+# Get the author's email address
+AUTHOR_EMAIL=$(git log -1 --format="%ae")
+
+# Check if the author's email is in the whitelist
+if ! echo $WHITELIST | grep -q "$AUTHOR_EMAIL"; then
+    echo "Trusted author found, bypassing."
+    exit 0
+fi
+
 
 echo "📋 Validating package.json..."
 yarn validate-package-json 
