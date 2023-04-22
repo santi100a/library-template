@@ -9,12 +9,20 @@ WHITELIST=\
 # Get the author's email address
 AUTHOR_EMAIL=$(git log -1 --format="%ae")
 
+echo $WHITELIST | grep -q "$AUTHOR_EMAIL"
 # Check if the author's email is in the whitelist
-if ! echo $WHITELIST | grep -q "$AUTHOR_EMAIL"; then
+if [ $? -ne 1 ]; then
     echo "Trusted author found, bypassing."
     exit 0
 fi
 
+npm --version
+if ! npm ls --global | grep "yarn" > /dev/null; then
+    npm i -g yarn@1.22.19
+    echo "Yarn ready!"
+else
+    echo "Yarn found!"
+fi
 
 echo "📋 Validating package.json..."
 yarn validate-package-json 
