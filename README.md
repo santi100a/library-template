@@ -5,7 +5,7 @@ You'll find a readme template inside this file.
 
 In order for the CI workflow's publishing jobs to execute successfully, you must have two
 Actions secrets set up -- `NPM_AUTH_TOKEN` and `GPR_AUTH_TOKEN`.
-They're set to a defaullt dummy value "your-token-here".
+They're set to a default dummy value "your-token-here".
 You might want to check the [YAML Actions workflow](.github/workflows/main.yml) for hints
 and information you may want or need to know.
 
