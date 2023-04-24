@@ -94,9 +94,18 @@ jobs:
         run: yarn
       - name: Build code
         run: yarn build
+      # For whatever reason, I have to have a separate secret set to a GitHub PAT to publish
+      # to GPR -- GITHUB_TOKEN won't work, even if I specify:
+      #
+      # permissions:
+      #    packages: write
+      # 
+      # at the top of the workflow/job.
       - name: Set authentication token
         run: |
           npm set //npm.pkg.github.com/:_authToken ${{ secrets.GPR_AUTH_TOKEN }}
+      # This step here is a weird workaround to the difference between my NPM and GitHub
+      # usernames. You can delete it if it's causing trouble or it's unnecessary.
       - name: Get ready to publish to GPR
         run: |
           jq ".name = \"@$REPO\"" package.json > temp.json && mv temp.json package.json
