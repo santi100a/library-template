@@ -6,7 +6,7 @@ You'll find a readme template inside this file.
 In order for the CI workflow's publishing jobs to execute successfully, you must have two
 Actions secrets set up -- `NPM_AUTH_TOKEN` and `GPR_AUTH_TOKEN`.
 They're set to a default dummy value "your-token-here".
-You might want to check the [YAML Actions workflow](.github/workflows/main.yml) for hints
+You might want to check the [YAML Actions workflow](.github/workflows/ci.yml) for hints
 and information you may want or need to know.
 
 ## Template features
@@ -17,7 +17,6 @@ and information you may want or need to know.
 - Automatic testing: Jest.
 - TypeScript 4.9.5 for built-in type definitions and support for compiling to ES3.
 - ESLint and Prettier.
-- A pre-commit hook for prettifying and validation, so you don't get embarrased if your PR's CI fails :)
 - Security policy and contribution guidelines.
 
 - Self-made scripts for verification of package.json and creation of an ESM wrapper
@@ -38,7 +37,7 @@ and information you may want or need to know.
 [![License][license badge]][repo url]
 [![Bundlephobia stats][bundlephobia badge]][bundlephobia url]
 
-[workflow badge]: https://github.com/<author>/<repo>/actions/workflows/main.yml/badge.svg
+[workflow badge]: https://github.com/<author>/<repo>/actions/workflows/ci.yml/badge.svg
 [npm badge]: https://img.shields.io/npm/v/@<author>/<repo>
 [stars badge]: https://img.shields.io/github/stars/<author>/<repo>.svg
 [license badge]: https://img.shields.io/github/license/<author>/<repo>.svg
