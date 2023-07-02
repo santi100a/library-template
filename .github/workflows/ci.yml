@@ -9,6 +9,8 @@ on:
 
 jobs:
   test:
+    outputs:
+      rel: ${{ steps.commit.outputs.rel }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,12 +26,12 @@ jobs:
           STRING=$(echo $COMMIT_MSG | (grep -E "infra:|docs:|lint:|code-style:" || echo ''))
 
           if [ -z "$STRING" ]; then
-           echo "IS_RELEASE_COMMIT=1" >> $GITHUB_OUTPUT
+           echo "rel=1" >> $GITHUB_OUTPUT
            echo "IS_RELEASE_COMMIT=1" >> $GITHUB_ENV
           else 
            echo "This commit will NOT trigger a release."
 
-           echo "IS_RELEASE_COMMIT=0" >> $GITHUB_OUTPUT
+           echo "rel=0" >> $GITHUB_OUTPUT
            echo "IS_RELEASE_COMMIT=0" >> $GITHUB_ENV
           fi
 
@@ -43,21 +45,18 @@ jobs:
         run: yarn validate-package-json
 
       - name: Run ESLint
-        if: env.IS_RELEASE_COMMIT == '1'
         run: yarn lint
 
       - name: Build source code
-        if: env.IS_RELEASE_COMMIT == '1'
         run: yarn build
 
       - name: Run test suites
-        if: env.IS_RELEASE_COMMIT == '1'
         run: yarn test
   release:
-    if: needs.test.outputs.IS_RELEASE_COMMIT == '1'
+    needs: test
+    if: needs.test.outputs.rel == 1 || needs.test.outputs.rel == '1'
     permissions:
       contents: write
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
