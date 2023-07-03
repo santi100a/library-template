@@ -5,7 +5,7 @@ You'll find a readme template inside this file.
 
 In order for the CI workflow's publishing jobs to execute successfully, you must have two
 Actions secrets set up -- `NPM_AUTH_TOKEN` and `GPR_AUTH_TOKEN`.
-They're set to a default dummy value "your-token-here".
+
 You might want to check the [YAML Actions workflow](.github/workflows/ci.yml) for hints
 and information you may want or need to know.
 
@@ -21,6 +21,11 @@ and information you may want or need to know.
 
 - Self-made scripts for verification of package.json and creation of an ESM wrapper
   around TypeScript's CommonJS output to allow for usage within both CJS and ESM projects.
+
+## Your todos as a user of this template
+
+- [ ] Change all placeholders all over different files.
+- [ ] Fill this README template.
 
 <!-- START README TEMPLATE -->
 <!-- 
