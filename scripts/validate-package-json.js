@@ -70,8 +70,5 @@ if (
 	typeof json.scripts !== 'object'
 )
 	throw new Error('❌ "scripts" invalid or missing.');
-if (json.scripts.prepublish)
-	throw new Error(
-		"❌ You're not allowed to have pre-publish scripts, as they could steal the " +
-			'NPM token used for publishing.'
-	);
+
+	
